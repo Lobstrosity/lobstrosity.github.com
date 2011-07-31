@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://lobstrosity.github.com/atom.xml" rel="self"/>
   <link href="http://lobstrosity.github.com/"/>
-  <updated>2011-07-31T15:06:46-07:00</updated>
+  <updated>2011-07-31T15:23:15-07:00</updated>
   <id>http://lobstrosity.github.com/</id>
   <author>
     <name>Matthew Bennett</name>
@@ -19,17 +19,47 @@
     <id>http://lobstrosity.github.com/blog/2011/07/29/test-post</id>
     <content type="html">&lt;p&gt;heyo!&lt;/p&gt;
 
-&lt;p&gt;``` javascript&lt;/p&gt;
+&lt;div&gt;&lt;script src='https://gist.github.com/741654.js?file='&gt;&lt;/script&gt;
+&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
+    &amp;lt;head&amp;gt;
+        &amp;lt;meta charset=&amp;quot;utf-8&amp;quot; /&amp;gt;
+        &amp;lt;title&amp;gt;Templates&amp;lt;/title&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body&amp;gt;
+        &amp;lt;div class=&amp;quot;listing&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
 
-&lt;pre&gt;&lt;code&gt;var whatever,
-    doStuff = function(value) {
-        console.log(['doStuff', value]);
-    };
+        &amp;lt;script class=&amp;quot;listing&amp;quot; type=&amp;quot;text/x-jquery-tmpl&amp;quot;&amp;gt;
+            &amp;lt;p&amp;gt;${firstName} ${lastName}&amp;lt;/p&amp;gt;
+            &amp;lt;ul&amp;gt;
+                {{tmpl(phoneNumbers) '.phoneNumbers'}}
+            &amp;lt;/ul&amp;gt;
+        &amp;lt;/script&amp;gt;
+        
+        &amp;lt;script class=&amp;quot;phoneNumbers&amp;quot; type=&amp;quot;text/x-jquery-tmpl&amp;quot;&amp;gt;
+            &amp;lt;li&amp;gt;${$item.data}&amp;lt;/li&amp;gt;
+        &amp;lt;/script&amp;gt;
 
-doStuff(whatever);
-&lt;/code&gt;&lt;/pre&gt;
+        &amp;lt;script src=&amp;quot;http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+        &amp;lt;script src=&amp;quot;https://github.com/jquery/jquery-tmpl/raw/master/jquery.tmpl.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
 
-&lt;p&gt;```&lt;/p&gt;
+        &amp;lt;script&amp;gt;
+            var user = {
+                firstName: 'John',
+                lastName: 'Doe',
+                phoneNumbers: [
+                    '555-1111',
+                    '444-8888'
+                ]
+            };
+
+            $('div.listing').html($('script.listing').tmpl(user));
+        &amp;lt;/script&amp;gt;
+    &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+
+
+
 </content>
   </entry>
   
