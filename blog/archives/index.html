@@ -95,6 +95,8 @@ width:660px;
 margin:0 auto;
 }
 
+header, #content { clear: both }
+
 h1 a {
 color:#000;
 text-decoration:none;
@@ -104,17 +106,13 @@ h1 a:hover,h1 a:active {
 text-decoration:underline;
 }
 
-#Links {
+header ul {
 float:right;
 margin:2em 0 0;
 }
 
-#Links li {
+header ul li {
 display:inline;
-}
-
-#Content {
-clear:both;
 }
 
 a {
@@ -122,12 +120,8 @@ color:#d14;
 text-decoration:underline;
 }
 
-.Post {
+.entry-content {
 border-top:1px solid;
-}
-
-.Date,.Tags {
-margin:.25em 0;
 }
 
 ul,ol {
@@ -141,19 +135,15 @@ list-style-type:disc;
 ol li {
 list-style-type:decimal;
 }
-
-.ShortUrl {
-text-align:right;
-}
 	</style>
 </head>
 
 	<body  >
 		<div id="wrapper">
-			<header><hgroup>
-  <h1><a href="/">(in parens)</a></h1>
-  
-</hgroup>
+			<header><h1>(<a href="/">in parens</a>)</h1>
+<ul id="Links">
+	<li><a href="http://twitter.com/#!/Lobstrosity" title="@Lobstrosity"><img width="16" height="20" src="http://static.tumblr.com/8jpzdvm/VA1lao3aq/twitter.png" /></a></li>
+</ul>
 </header>
 
 			<nav role=navigation><ul role=main-navigation>
@@ -162,9 +152,8 @@ text-align:right;
 </ul>
 </nav>
 
-			<div id="main">
-				<div id="content">
-					<div>
+			<div id="content">
+				<div>
 	<article>
 		<header>
 			<h1 class="entry-title">Blog Archive</h1>
@@ -194,8 +183,8 @@ text-align:right;
 	</article>
 </div>
 
-					
-						<aside role=sidebar><section>
+				
+					<aside role=sidebar><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
@@ -213,8 +202,7 @@ text-align:right;
 
 
 </aside>
-					
-				</div>
+				
 			</div>
 
 			<footer><p>
