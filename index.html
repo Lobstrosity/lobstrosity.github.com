@@ -145,14 +145,15 @@ list-style-type:disc;
 ol li {
 list-style-type:decimal;
 }
-	</style>
+.gist{border:1px solid #dedede;font:85% "Courier New", Monaco, monospace;background:#eaeaea;margin:1em 0}.gist .gist-file .gist-meta{overflow:hidden;color:#666;padding:.5em}.gist .gist-file .gist-data{overflow:auto;word-wrap:normal;border-bottom:1px solid #ddd}.gist pre{padding:.5em}.gist .c,.gist .cm,.gist .c1,.gist .cs,.gist .ge{font-style:italic}.gist .k,.gist .o,.gist .cp,.gist .cs,.gist .gs,.gist .kc,.gist .kd,.gist .kp,.gist .kr,.gist .kt,.gist .nc,.gist .ne,.gist .nf,.gist .ow{font-weight:bold}.gist .c,.gist .cm,.gist .c1{color:#998}.gist .gd{background:#fdd}.gist .gd .x{background:#faa}.gist .gi{background:#dfd}.gist .gi .x{background:#afa}.gist .k,.gist .o,.gist .gd,.gist .ge,.gist .gi{color:#000}.gist .err{background:#e3d2d2;color:#a61717}.gist .cp,.gist .cs,.gist .gh,.gist .bp{color:#999}.gist .gr,.gist .gt{color:#a00}.gist .go{color:#888}.gist .gp,.gist .nn{color:#555}.gist .gu{color:#aaa}.gist .m,.gist .mf,.gist .mh,.gist .mi,.gist .mo,.gist .il{color:#099}.gist .s,.gist .sb,.gist .sc,.gist .sd,.gist .s2,.gist .se,.gist .sh,.gist .si,.gist .sx,.gist .s1{color:#d14}.gist .na,.gist .no,.gist .nv,.gist .vc,.gist .vg,.gist .vi{color:#008080}.gist .nb{color:#0086B3}.gist .ni{color:#800080}.gist .nt{color:#000080}.gist .w{color:#bbb}.gist .sr{color:#009926}.gist .ss{color:#990073}
+</style>
 </head>
 
 	<body  >
 		<div id="wrapper">
 			<header>
 	<h1>(<a href="/">in parens</a>)</h1>
-	<ul id="Links">
+	<ul>
 		<li><a href="http://twitter.com/#!/Lobstrosity" title="@Lobstrosity"><img width="16" height="20" src="http://static.tumblr.com/8jpzdvm/VA1lao3aq/twitter.png" /></a></li>
 	</ul>
 </header>
@@ -170,18 +171,18 @@ list-style-type:decimal;
 	<h2 class="entry-title"><a href="/blog/2011/08/06/blah-another-new-test-post/">Blah Another New Test Post</a></h2>
 
 <div class="meta">
+	
+
+
+
+
 	<p class="date">
+	<time datetime="2011-08-06 09:42:00 -0700" pubdate  updated >Aug 6<span>th</span>, 2011</time>
+	
+	</p>
 
+	
 
-
-
-<time datetime="2011-08-06 09:42:00 -0700" pubdate  updated >Aug 6<span>th</span>, 2011</time>
-
-
-</p>
-	<p class="tags">
-
-</p>
 </div>
 
 
@@ -194,13 +195,7 @@ list-style-type:decimal;
 </ol>
 
 
-<!--more-->
-
-
-<p>this part should only appear on the post page</p>
-</div>
-
-	
+<p><a rel="full-article" href="/blog/2011/08/06/blah-another-new-test-post/">Continued &rarr;</a></p></div>
 
 
 		</article>
@@ -211,114 +206,45 @@ list-style-type:decimal;
 	<h2 class="entry-title"><a href="/blog/2011/07/29/test-post/">Test Post</a></h2>
 
 <div class="meta">
+	
+
+
+
+
 	<p class="date">
+	<time datetime="2011-07-29 19:22:00 -0700" pubdate  updated >Jul 29<span>th</span>, 2011</time>
+	
+	</p>
 
+	
 
-
-
-<time datetime="2011-07-29 19:22:00 -0700" pubdate  updated >Jul 29<span>th</span>, 2011</time>
-
-
-</p>
 	<p class="tags">
+		
+			<a class='category' href='/blog/categories/arrays/'>arrays</a>, <a class='category' href='/blog/categories/jquery/'>jquery</a>, <a class='category' href='/blog/categories/templates/'>templates</a>
+		
+	</p>
 
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/arrays/'>arrays</a>, <a class='category' href='/blog/categories/jquery/'>jquery</a>, <a class='category' href='/blog/categories/templates/'>templates</a>
-  
-</span>
-
-</p>
 </div>
 
 
 	<div class="entry-content"><p>heyo!</p>
 
-<div><script src='https://gist.github.com/741654.js?file='></script>
-<noscript><pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot; /&gt;
-        &lt;title&gt;Templates&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;div class=&quot;listing&quot;&gt;&lt;/div&gt;
-
-        &lt;script class=&quot;listing&quot; type=&quot;text/x-jquery-tmpl&quot;&gt;
-            &lt;p&gt;${firstName} ${lastName}&lt;/p&gt;
-            &lt;ul&gt;
-                {{tmpl(phoneNumbers) '.phoneNumbers'}}
-            &lt;/ul&gt;
-        &lt;/script&gt;
-        
-        &lt;script class=&quot;phoneNumbers&quot; type=&quot;text/x-jquery-tmpl&quot;&gt;
-            &lt;li&gt;${$item.data}&lt;/li&gt;
-        &lt;/script&gt;
-
-        &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js&quot;&gt;&lt;/script&gt;
-        &lt;script src=&quot;https://github.com/jquery/jquery-tmpl/raw/master/jquery.tmpl.min.js&quot;&gt;&lt;/script&gt;
-
-        &lt;script&gt;
-            var user = {
-                firstName: 'John',
-                lastName: 'Doe',
-                phoneNumbers: [
-                    '555-1111',
-                    '444-8888'
-                ]
-            };
-
-            $('div.listing').html($('script.listing').tmpl(user));
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre></noscript></div>
+<p class="gist"><a href="http://gist.github.com/741654">http://gist.github.com/741654</a></p>
 
 </div>
-
-	
 
 
 		</article>
 	
 
-	<nav role="pagination">
-		<div>
-			
-
-			<a href="/blog/archives">Blog Archives</a>
-
-			
-		</div>
-	</nav>
+	
 </div>
 
-				
-					<aside role=sidebar><section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2011/08/06/blah-another-new-test-post/">Blah Another New Test Post</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/07/29/test-post/">Test Post</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-
-
-
-</aside>
-				
 			</div>
 
 			
 		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script>var z="http://gist.github.com/",y=document.write,x=$("body"),w=$("p.gist").map(function(b,a){a=$(a);var c=$("a",a),u=c.attr("href");if(c.length&&u.indexOf(z)==0)return{p:a,id:u.substring(z.length)}}).get(),v=function(){if(w.length==0)document.write=y;else{var b=w.shift();document.write=function(){document.write=function(a){b.p.replaceWith(a);v()}};x.append('<scr'+'ipt src="'+z+b.id+'.js"></scr'+'ipt>')}};v();</script>
 	</body>
 </html>
