@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://lobstrosity.github.com/atom.xml" rel="self"/>
   <link href="http://lobstrosity.github.com/"/>
-  <updated>2011-08-06T09:48:03-07:00</updated>
+  <updated>2011-08-06T09:58:07-07:00</updated>
   <id>http://lobstrosity.github.com/</id>
   <author>
     <name>Matthew Bennett</name>
@@ -26,7 +26,10 @@
 &lt;/ol&gt;
 
 
-&lt;p&gt;this post doesn't have an excerpt.&lt;/p&gt;
+&lt;!--more--&gt;
+
+
+&lt;p&gt;this part should only appear on the post page&lt;/p&gt;
 </content>
   </entry>
   
@@ -76,13 +79,6 @@
     &amp;lt;/body&amp;gt;
 &amp;lt;/html&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
 
-
-
-
-&lt;!--more--&gt;
-
-
-&lt;p&gt;this part should only appear on the post page&lt;/p&gt;
 </content>
   </entry>
   
