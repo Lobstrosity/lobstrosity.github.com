@@ -2,7 +2,7 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://lobstrosity.github.com/blog/2011/07/29/test-post/</loc>
-        <lastmod>2011-08-06T09:41:14-07:00</lastmod>
+        <lastmod>2011-08-06T09:46:35-07:00</lastmod>
     </url>
     <url>
         <loc>http://lobstrosity.github.com/blog/2011/08/06/blah-another-new-test-post/</loc>
@@ -10,10 +10,10 @@
     </url>
     <url>
         <loc>http://lobstrosity.github.com/blog/archives/</loc>
-        <lastmod>2011-08-06T09:44:52-07:00</lastmod>
+        <lastmod>2011-08-06T09:46:35-07:00</lastmod>
     </url>
     <url>
         <loc>http://lobstrosity.github.com/</loc>
-        <lastmod>2011-08-06T09:44:52-07:00</lastmod>
+        <lastmod>2011-08-06T09:46:35-07:00</lastmod>
     </url>
 </urlset>
