@@ -4,13 +4,32 @@
   <title></title>
   <link href="http://lobstrosity.github.com/atom.xml" rel="self"/>
   <link href="http://lobstrosity.github.com/"/>
-  <updated>2011-08-06T09:33:57-07:00</updated>
+  <updated>2011-08-06T09:43:18-07:00</updated>
   <id>http://lobstrosity.github.com/</id>
   <author>
     <name>Matthew Bennett</name>
     
   </author>
 
+  
+  <entry>
+    <title>Blah Another New Test Post</title>
+    <link href="http://lobstrosity.github.com/blog/2011/08/06/blah-another-new-test-post/"/>
+    <updated>2011-08-06T09:42:00-07:00</updated>
+    <id>http://lobstrosity.github.com/blog/2011/08/06/blah-another-new-test-post</id>
+    <content type="html">&lt;h1&gt;numbered&lt;/h1&gt;
+
+&lt;h1&gt;list&lt;/h1&gt;
+
+&lt;h1&gt;with&lt;/h1&gt;
+
+&lt;h1&gt;some&lt;/h1&gt;
+
+&lt;h1&gt;items&lt;/h1&gt;
+
+&lt;p&gt;this post doesn't have an excerpt.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Test Post</title>
@@ -60,6 +79,11 @@
 
 
 
+
+&lt;!-- more --&gt;
+
+
+&lt;p&gt;this part should only appear on the post page&lt;/p&gt;
 </content>
   </entry>
   
