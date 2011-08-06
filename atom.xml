@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://lobstrosity.github.com/atom.xml" rel="self"/>
   <link href="http://lobstrosity.github.com/"/>
-  <updated>2011-08-06T09:43:18-07:00</updated>
+  <updated>2011-08-06T09:45:05-07:00</updated>
   <id>http://lobstrosity.github.com/</id>
   <author>
     <name>Matthew Bennett</name>
@@ -17,15 +17,14 @@
     <link href="http://lobstrosity.github.com/blog/2011/08/06/blah-another-new-test-post/"/>
     <updated>2011-08-06T09:42:00-07:00</updated>
     <id>http://lobstrosity.github.com/blog/2011/08/06/blah-another-new-test-post</id>
-    <content type="html">&lt;h1&gt;numbered&lt;/h1&gt;
+    <content type="html">&lt;ol&gt;
+&lt;li&gt;numbered&lt;/li&gt;
+&lt;li&gt;list&lt;/li&gt;
+&lt;li&gt;with&lt;/li&gt;
+&lt;li&gt;some&lt;/li&gt;
+&lt;li&gt;items&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;h1&gt;list&lt;/h1&gt;
-
-&lt;h1&gt;with&lt;/h1&gt;
-
-&lt;h1&gt;some&lt;/h1&gt;
-
-&lt;h1&gt;items&lt;/h1&gt;
 
 &lt;p&gt;this post doesn't have an excerpt.&lt;/p&gt;
 </content>
