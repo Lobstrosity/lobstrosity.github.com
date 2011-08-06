@@ -124,7 +124,11 @@ article {
 border-top:1px solid;
 }
 
-article .dates, article .tags
+article .meta {
+	margin: 0 0 1em;
+}
+
+article .date, article .tags
 {
 	margin:.25em 0;
 }
@@ -160,7 +164,8 @@ list-style-type:decimal;
 		
 	<h2 class="entry-title">Test Post</h2>
 
-<p class="date">
+<div class="meta">
+	<p class="date">
 
 
 
@@ -169,6 +174,16 @@ list-style-type:decimal;
 
 
 </p>
+	<p class="tags">
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arrays/'>arrays</a>, <a class='category' href='/blog/categories/jquery/'>jquery</a>, <a class='category' href='/blog/categories/templates/'>templates</a>
+  
+</span>
+
+</p>
+</div>
 
 
 	<div class="entry-content"><p>heyo!</p>
@@ -235,6 +250,12 @@ list-style-type:decimal;
 
 				
 
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arrays/'>arrays</a>, <a class='category' href='/blog/categories/jquery/'>jquery</a>, <a class='category' href='/blog/categories/templates/'>templates</a>
+  
+</span>
+
 
 			</p>
 			
@@ -256,6 +277,10 @@ list-style-type:decimal;
 					<aside role=sidebar><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/29/test-post.markdown/">Test Post</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2011/07/29/test-post/">Test Post</a>
