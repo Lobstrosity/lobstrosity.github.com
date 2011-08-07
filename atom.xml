@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://lobstrosity.github.com/atom.xml" rel="self"/>
   <link href="http://lobstrosity.github.com/"/>
-  <updated>2011-08-06T14:36:08-07:00</updated>
+  <updated>2011-08-07T16:58:09-07:00</updated>
   <id>http://lobstrosity.github.com/</id>
   <author>
     <name>Matthew Bennett</name>
@@ -26,6 +26,10 @@
 &lt;/ol&gt;
 
 
+&lt;h3&gt;Subheader&lt;/h3&gt;
+
+&lt;p&gt;Lorem ipsum.&lt;/p&gt;
+
 &lt;!--more--&gt;
 
 
@@ -38,10 +42,23 @@
     <link href="http://lobstrosity.github.com/blog/2011/07/29/test-post/"/>
     <updated>2011-07-29T19:22:00-07:00</updated>
     <id>http://lobstrosity.github.com/blog/2011/07/29/test-post</id>
-    <content type="html">&lt;p&gt;heyo!&lt;/p&gt;
+    <content type="html">&lt;p&gt;According to the official documentation, &lt;code&gt;.tmpl()&lt;/code&gt;&amp;rsquo;s data parameter&amp;hellip;&lt;/p&gt;
 
-&lt;p class=&quot;gist&quot;&gt;&lt;a href=&quot;http://gist.github.com/741654&quot;&gt;http://gist.github.com/741654&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;&amp;hellip;can be any JavaScript type, including Array or Object.&lt;/p&gt;&lt;/blockquote&gt;
 
+&lt;p&gt;The typical case would be to pass an object. This allows you to refer to the properties of that object by name in the template. &lt;a href=&quot;http://dl.dropbox.com/u/15603446/inParens/final/usingArraysAsTemplates.2.html&quot;&gt;Demo&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p class=&quot;gist&quot;&gt;&lt;a href=&quot;http://gist.github.com/741650&quot;&gt;http://gist.github.com/741650&lt;/a&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <title>Old Post</title>
+    <link href="http://lobstrosity.github.com/blog/2010/08/06/old-post/"/>
+    <updated>2010-08-06T21:53:00-07:00</updated>
+    <id>http://lobstrosity.github.com/blog/2010/08/06/old-post</id>
+    <content type="html">
 </content>
   </entry>
   
