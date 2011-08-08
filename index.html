@@ -10,11 +10,10 @@
 	
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="/stylesheets/combined.min.css" rel="stylesheet" />
 	<link rel="shortcut icon" href="/images/favicon.ico" />
 	<link rel="apple-touch-icon" href="/images/apple-touch-icon.png"/>
-	<link href="/stylesheets/gist.css" rel="stylesheet" />
-	<link href="/stylesheets/inparens.css" rel="stylesheet" />
-	<script src="/javascripts/modernizr-2.0.js"></script>
+	<script src="/scripts/modernizr-2.0.js"></script>
 </head>
 
 	<body  >
@@ -156,6 +155,6 @@
 			</footer>
 		</div>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-		<script>var z="http://gist.github.com/",y=document.write,x=$("body"),w=$("p.gist").map(function(b,a){a=$(a);var c=$("a",a),u=c.attr("href");if(c.length&&u.indexOf(z)==0)return{p:a,id:u.substring(z.length)}}).get(),v=function(){if(w.length==0)document.write=y;else{var b=w.shift();document.write=function(){document.write=function(a){b.p.replaceWith(a);v()}};x.append('<scr'+'ipt src="'+z+b.id+'.js"></scr'+'ipt>')}};v();</script>
+		<script src="/scripts/gist.js></script>
 	</body>
 </html>
