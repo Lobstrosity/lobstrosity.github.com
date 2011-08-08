@@ -1,4 +1,7 @@
-body{font:16px Georgia, serif;}
+body {
+	font:16px Georgia, serif;
+	overflow-y: scroll;
+}
 
 h1 {
 color:#900;
