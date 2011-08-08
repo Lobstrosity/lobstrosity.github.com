@@ -2,9 +2,63 @@ html { 	overflow-y: scroll }
 
 body { font:16px Georgia, serif }
 
-h1 {
-color:#900;
-float:left;
+#wrapper
+{
+	width: 660px;
+	margin: 0 auto;
+}
+
+header, #content, article, .clear-fix, footer { clear: both }
+
+header,
+footer
+{
+	overflow: hidden;
+}
+
+header ul
+{
+	float: right;
+	margin: 2em 0 0;
+}
+
+header ul li
+{
+	display:inline;
+}
+
+header li a
+{
+	display: block;
+	margin-left: 1em;
+	float: left;
+}
+
+header li a.twitter
+{
+	text-indent: -999em;
+	width: 16px;
+	height: 20px;
+	background: url(/images/twitter.png) no-repeat;
+}
+
+h1
+{
+	color: #900;
+	float: left;
+}
+
+h1 a,
+h1 a:visited
+{
+	color:#000;
+	text-decoration:none;
+}
+
+h1 a:hover,
+h1 a:active
+{
+	text-decoration:underline;
 }
 
 blockquote
@@ -16,22 +70,9 @@ blockquote
 	border-width: 1px 1px 1px 4px;
 }
 
-code
-{
-	font-family: Consolas, Inconsolata, Monaco, "Courier New", monospace;
-}
+code { font-family: Consolas, Inconsolata, Monaco, "Courier New", monospace }
 
-#wrapper {
-width:660px;
-margin:0 auto;
-}
-
-header, #content, article, .clear-fix, footer { clear: both }
-
-#blog-archives .category
-{
-	overflow: hidden;
-}
+#blog-archives .year { overflow: hidden }
 
 #blog-archives .articles
 {
@@ -48,67 +89,33 @@ header, #content, article, .clear-fix, footer { clear: both }
 	margin-top: 0;
 }
 
-h1 a,
-h1 a:visited {
-color:#000;
-text-decoration:none;
+article
+{
+	border-top: 1px solid;
+	margin: 0 0 1em;
 }
 
-h1 a:hover,h1 a:active {
-text-decoration:underline;
-}
+.entry-title { margin-bottom: 4px }
 
-header ul {
-float: right;
-margin: 2em 0 0;
-}
+article .meta { margin: 0 0 1em }
 
-header ul li {
-	display:inline;
+article .date,
+article .tags
+{
+	margin:.25em 0;
 }
 
 a,
-a:visited{
-color:#900;
-text-decoration:underline;
+a:visited
+{
+	color: #900;
+	text-decoration: underline;
 }
 
 p.gist
 {
 	padding: 0 0 0 20px;
 	background: url(/images/loading.gif) 0 2px no-repeat;
-}
-
-article {
-border-top:1px solid;
-margin: 0 0 1em;
-}
-
-article .meta {
-	margin: 0 0 1em;
-}
-
-article .date, article .tags
-{
-	margin:.25em 0;
-}
-
-ul,ol {
-margin-left:1.12em;
-}
-
-ul li {
-list-style-type:disc;
-}
-
-ol li {
-list-style-type:decimal;
-}
-
-header,
-footer
-{
-	overflow: hidden;
 }
 
 footer
@@ -124,21 +131,21 @@ footer ul
 	position: relative;
 }
 
-header li a
+footer li
 {
-	display: block;
-	margin-left: 1em;
-	float: left;
+	width: 220px;
+	position: absolute;
+	list-style-type: none
 }
 
-footer li { width: 220px; position: absolute; list-style-type: none }
-footer li.archive { left: 220px; text-align: center }
-footer li.next { right: 0; text-align: right }
-
-header li a.twitter
+footer li.archive
 {
-	text-indent: -999em;
-	width: 16px;
-	height: 20px;
-	background: url(/images/twitter.png) no-repeat;
+	left: 220px;
+	text-align: center;
+}
+
+footer li.next
+{
+	right: 0;
+	text-align: right;
 }
