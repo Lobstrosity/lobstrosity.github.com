@@ -59,6 +59,8 @@
 <!--more-->
 
 
+<h3>Benefits</h3>
+
 <p>Take the following example class:</p>
 
 <p class="gist"><a href="http://gist.github.com/1133111#file_1.widget.cs" data-file="1.Widget.cs">http://gist.github.com/1133111#file_1.widget.cs</a></p>
@@ -86,6 +88,8 @@
 <p>Dapper will scan the property names of the <code>object</code> parameter&#8211;in this case, a populated <code>Widget</code>&#8211;and populate the parameters of the command with the widget&#8217;s property values.</p>
 
 <p>But, as I said before, Dapper&#8217;s focus is on speed. So there are a few trade-offs in the deal.</p>
+
+<h3>Drawbacks</h3>
 
 <p>First, validation becomes your responsibility. Dapper doesn&#8217;t automatically perform validation on inserts and updates (like, e.g., Entity Framework does, based on <code>DataAnnotations</code> attributes and <code>IValidatableObject</code> implementations).</p>
 
@@ -169,6 +173,8 @@
 
 
 <p>You can&#8217;t fix this with a simple <code>Distinct()</code> call tacked on the result of <code>Query</code>. This is because each of these categories are distinct objects with duplicate data, as opposed to being duplicate references to distinct objects. The <code>map</code> function can be modified, however, to account for the duplicates:</p>
+
+<h3>Solution</h3>
 
 <p class="gist"><a href="http://gist.github.com/1133111#file_8.get_hierarchy.cs" data-file="8.GetHierarchy.cs">http://gist.github.com/1133111#file_8.get_hierarchy.cs</a></p>
 
