@@ -168,12 +168,12 @@
 </ul>
 
 
-<p>You can&#8217;t fix this with a simple <code>Distinct</code> call tacked on the result of <code>Query</code>. This is because each of these categories are distinct objects with duplicate data, as opposed to being duplicate references to distinct objects. The <code>map</code> function can be modified, however, to account for the duplicates:</p>
+<p>You can&#8217;t fix this with a simple <code>Distinct()</code> call tacked on the result of <code>Query</code>. This is because each of these categories are distinct objects with duplicate data, as opposed to being duplicate references to distinct objects. The <code>map</code> function can be modified, however, to account for the duplicates:</p>
 
 <p class="gist"><a href="http://gist.github.com/1133111#file_8.get_hierarchy.cs" data-file="8.GetHierarchy.cs">http://gist.github.com/1133111#file_8.get_hierarchy.cs</a></p>
 
 
-<p>The <code>map</code> function now uses a dictionary to store and retrieve the distinct categories. Also note that <code>Distinct</code> has to be called on the final result. This is because <code>map</code> must return a <code>Category</code>, which means that <code>Query</code> will be returning duplicates. But, due to the <code>lookup</code> logic, &#8220;duplicate&#8221; in this case means duplicate references, unlike in the first pass implementaiton.</p>
+<p>The <code>map</code> function now uses a dictionary to store and retrieve the distinct categories. Also note that <code>Distinct()</code> has to be called on the final result. This is because <code>map</code> must return a <code>Category</code>, which means that <code>Query</code> will be returning duplicates. But, due to the <code>lookup</code> logic, &#8220;duplicate&#8221; in this case means duplicate references, unlike in the first pass implementaiton.</p>
 
 <p>Due to Dapper&#8217;s focus on performance (and reducing instances of N+1 queries), you&#8217;d think they would highlight a use case like this on their website. Sadly, they don&#8217;t. I had to dig down deep in their test cases to find the basic implementation above (in the <a href="http://code.google.com/p/dapper-dot-net/source/browse/Tests/Tests.cs#824">ParentChildIdentityAssociations test</a>), and even then, they don&#8217;t provide comments as to why they&#8217;re doing what they&#8217;re doing.</p>
 </div>
