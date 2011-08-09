@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]--><head>
+	<meta charset="utf-8">
+	<title>(in parens): Mapping Parent-Child Relationships With Dapper</title>
+	<meta name="author" content="Matthew Bennett">
+	
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="/stylesheets/combined.min.css" rel="stylesheet" />
+	<link rel="shortcut icon" href="/images/favicon.ico" />
+	<link rel="apple-touch-icon" href="/images/apple-touch-icon.png"/>
+	<script src="/scripts/modernizr-2.0.js"></script>
+</head>
+
+	<body>
+		<div id="wrapper">
+			<header>
+				<h1>(<a href="/">in parens</a>)</h1>
+				<ul>
+					<li><a class="twitter" href="http://twitter.com/#!/Lobstrosity">@Lobstrosity</a></li>
+				</ul>
+			</header>
+
+			<div id="content">
+				<div>
+	<article>
+		
+	<h2 class="entry-title">Mapping Parent-Child Relationships With Dapper</h2>
+
+<div class="meta">
+	
+
+
+
+
+	<p class="date">
+	<time datetime="2011-08-08T17:39:00-07:00" pubdate>Aug 8<span>th</span>, 2011</time>
+	</p>
+
+	
+
+	<p class="tags">
+		
+			<a class='category' href='/blog/categories/dapper/'>dapper</a>, <a class='category' href='/blog/categories/dot-net/'>dot-net</a>
+		
+	</p>
+
+</div>
+
+
+	<div class="entry-content"><p>Dapper is a great, new (kind of), tiny database object mapper for the .NET framework. Its footprint is a single file. Drop it in your project and it adds a handful of extension methods to the <code>IDbConnection</code> interface.</p>
+
+<p>Dapper&#8217;s focus is on speed. According to the <a href="http://code.google.com/p/dapper-dot-net/#Performance" title="dapper-dot-net Performance">project&#8217;s home page</a>, it&#8217;s barely slower than hand-coding your own mapping with a <code>SqlDataReader</code>. What those few milliseconds buy you, though, is automatic mapping to your POCOs. Speed isn&#8217;t free, though. But I&#8217;ll get to that part later.</p>
+
+<!--more-->
+
+
+<p>Take the following example class:</p>
+
+<p class="gist"><a href="http://gist.github.com/1133111#file_1.widget.cs" data-file="1.Widget.cs">Gist</a></p>
+
+
+<p>A hand-coded <code>SqlDataReader</code> method to get all widgets would look something like this:</p>
+
+<p class="gist"><a href="http://gist.github.com/1133111#file_2.get_all_widgets_with_sql_data_reader.cs" data-file="2.GetAllWidgetsWithSqlDataReader.cs">Gist</a></p>
+
+
+<p>A Dapper-powered method to get all widgets would look much simpler. Something like:</p>
+
+<p class="gist"><a href="http://gist.github.com/1133111#file_3.get_all_widgets_with_dapper.cs" data-file="3.GetAllWidgetsWithDapper.cs">Gist</a></p>
+
+
+<p>The <code>Query</code> method used above is one of the extension methods provided by Dapper. Provide the type you want to map to and a corresponding SQL query and it will return an <code>IEnumerable</code> of that type, populated with the results of the query.</p>
+
+<p>There&#8217;s also an <code>Execute</code> method, useful for updates and inserts. It takes a parameterized command and an <code>object</code> parameter. It will then populate the parameters of the command with the properties of the <code>object</code>, matching based on name.</p>
+
+<p>So, a (contrived) method to insert a new widget would look like:</p>
+
+<p class="gist"><a href="http://gist.github.com/1133111#file_4.add_widget.cs" data-file="4.AddWidget.cs">Gist</a></p>
+
+
+<p>Dapper will scan the property names of the <code>object</code> parameter&#8211;in this case, a populated <code>Widget</code>&#8211;and populate the parameters of the command with the widget&#8217;s property values.</p>
+
+<p>But, as I said before, Dapper&#8217;s focus is on speed. So there are a few trade-offs in the deal.</p>
+
+<p>First, validation becomes your responsibility. Dapper doesn&#8217;t automatically perform validation on inserts and updates (like, e.g., Entity Framework does, based on <code>DataAnnotations</code> attributes and <code>IValidatableObject</code> implementations).</p>
+
+<p>Another great feature that Entity Framework handles pretty much automatically is the mapping of object hierarchies.</p>
+
+<p>Take the following domain model:</p>
+
+<p class="gist"><a href="http://gist.github.com/1133111#file_5.domain_model.cs" data-file="5.DomainModel.cs">Gist</a></p>
+
+
+<p>And based on an assumed database schema, a <code>Category</code> can have any number of <code>Widget</code> children and a <code>Widget</code> must have one and only one <code>Category</code> parent.</p>
+
+<p>If you were to sprinkle a few <code>KeyAttribute</code>s in there, Entity Framework would be able to track and validate the parent-child relationships for you automatically.</p>
+
+<p>Let&#8217;s say we want to build a method that returns a collection of <code>Category</code> instances, with their children populated. Dapper has overloads of the <code>Query</code> method that allow you to use a single query to return multiple records per row. Perfect for generating an entire parnet-child object graph with a single <code>JOIN</code> query, right?</p>
+
+<p>Not so fast.</p>
+
+<p>The previously mentioned overloads look like:</p>
+
+<p class="gist"><a href="http://gist.github.com/1133111#file_6.query.cs" data-file="6.Query.cs">Gist</a></p>
+
+
+<p>Where the first N types are the types being queried for (in the order in which they appear in the query) and the last type is the type of the <code>IEnumerable</code> that will be returned. The <code>map</code> parameter allows you to pass a function that tells Dapper how to map the objects in each row of the result to each other.</p>
+
+<p>So, a first pass:</p>
+
+<p class="gist"><a href="http://gist.github.com/1133111#file_7.get_hierarchy_first_pass.cs" data-file="7.GetHierarchyFirstPass.cs">Gist</a></p>
+
+
+<p>That SQL query will return one row per widget, with the category information for that widget&#8217;s parent. Dapper doesn&#8217;t care, though, that such a result set contains duplicate categories. So Dapper returns a collection of categories (containing duplicates), each with exactly one child widget.</p>
+
+<p>So, if your tree logically looked like:</p>
+
+<ul>
+<li>Category 1
+
+<ul>
+<li>Widget 1</li>
+<li>Widget 2</li>
+</ul>
+</li>
+<li>Category 2
+
+<ul>
+<li>Widget 3</li>
+<li>Widget 4</li>
+</ul>
+</li>
+</ul>
+
+
+<p>&#8230;Dapper would return an object hierarchy that actually looks like:</p>
+
+<ul>
+<li>Category 1
+
+<ul>
+<li>Widget 1</li>
+</ul>
+</li>
+<li>Category 1
+
+<ul>
+<li>Widget 2</li>
+</ul>
+</li>
+<li>Category 2
+
+<ul>
+<li>Widget 3</li>
+</ul>
+</li>
+<li>Category 2
+
+<ul>
+<li>Widget 4</li>
+</ul>
+</li>
+</ul>
+
+
+<p>You can&#8217;t fix this with a simple <code>Distinct</code> call tacked on the result of <code>Query</code>. This is because each of these categories are distinct objects with duplicate data, as opposed to being duplicate references to distinct objects. The <code>map</code> function can be modified, however, to account for the duplicates:</p>
+
+<p class="gist"><a href="http://gist.github.com/1133111#file_8.get_hierarchy.cs" data-file="8.GetHierarchy.cs">Gist</a></p>
+
+
+<p>The <code>map</code> function now uses a dictionary to store and retrieve the distinct categories. Also note that <code>Distinct</code> has to be called on the final result. This is because <code>map</code> must return a <code>Category</code>, which means that <code>Query</code> will be returning duplicates. But, due to the <code>lookup</code> logic, &#8220;duplicate&#8221; in this case means duplicate references, unlike in the first pass implementaiton.</p>
+
+<p>Due to Dapper&#8217;s focus on performance (and reducing instances of N+1 queries), you&#8217;d think they would highlight a use case like this on their website. Sadly, they don&#8217;t. I had to dig down deep in their test cases to find the basic implementation above (in the <a href="http://code.google.com/p/dapper-dot-net/source/browse/Tests/Tests.cs#824">ParentChildIdentityAssociations test</a>), and even then, they don&#8217;t provide comments as to why they&#8217;re doing what they&#8217;re doing.</p>
+</div>
+
+
+	</article>
+</div>
+
+			</div>
+
+			<footer>
+				<nav>
+					<ul>
+						
+
+						<li class="archive"><a href="/blog/archives">Archive</a></li>
+
+						
+					</ul>
+				</nav>
+			</footer>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script src="/scripts/gist.min.js"></script>
+	</body>
+</html>
