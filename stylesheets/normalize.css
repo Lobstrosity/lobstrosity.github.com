@@ -98,6 +98,14 @@ ol {
     padding: 0;
 }
 
+ul ol,
+ul ul,
+ol ol,
+ol ul
+{
+	margin: .25em 0 .25em 1.25em;
+}
+
 nav ul,
 nav ol {
     list-style: none;

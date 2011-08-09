@@ -15,7 +15,7 @@
 	.gist .gist-file,
 	.gist .gist-file pre
 	{
-		font: 14px Consolas, Inconsolata, Monaco, "Courier New", monospace;
+		font: 12px Consolas, Inconsolata, Monaco, "Courier New", monospace;
 	}
 
 		.gist .gist-file .gist-meta {
