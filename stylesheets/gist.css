@@ -19,25 +19,13 @@
 	}
 
 		.gist .gist-file .gist-meta {
-			overflow: hidden;
-			padding: .5em;
-			color: #666;
-			background-color: #eaeaea;
+			display: none;
 		}
-
-			.gist .gist-file .gist-meta a {
-				color: #369;
-			}
-
-			.gist .gist-file .gist-meta a:visited {
-				color: #737;
-			}
 
 		.gist .gist-file .gist-data {
 			overflow: auto;
 			word-wrap: normal;
 			background-color: #f8f8ff;
-			border-bottom: 1px solid #ddd;
 		}
 
 			.gist .gist-file .gist-data pre {
