@@ -58,7 +58,7 @@
 
 	<div class="entry-content"><p>Dapper is a great, new (kind of), tiny database object mapper for the .NET framework. Its footprint is a single file. Drop it in your project and it adds a handful of extension methods to the <code>IDbConnection</code> interface.</p>
 
-<p>Dapper&#8217;s focus is on speed. According to the <a href="http://code.google.com/p/dapper-dot-net/#Performance" title="dapper-dot-net Performance">project&#8217;s home page</a>, it&#8217;s barely slower than hand-coding your own mapping with a <code>SqlDataReader</code>. What those few milliseconds buy you, though, is automatic mapping to your POCOs. Speed isn&#8217;t free, though. But I&#8217;ll get to that part later.</p>
+<p>Dapper&#8217;s focus is on speed. According to the <a href="http://code.google.com/p/dapper-dot-net/#Performance" title="dapper-dot-net Performance (code.google.com)">project&#8217;s home page</a>, it&#8217;s barely slower than hand-coding your own mapping with a <code>SqlDataReader</code>. What those few milliseconds buy you, though, is automatic mapping to your POCOs. Speed isn&#8217;t free, though. But I&#8217;ll get to that part later.</p>
 
 <!--more-->
 
@@ -185,7 +185,7 @@
 
 <p>The <code>map</code> function now uses a dictionary to store and retrieve the distinct categories. Also note that <code>Distinct()</code> has to be called on the final result. This is because <code>map</code> must return a <code>Category</code>, which means that <code>Query</code> will be returning duplicates. But, due to the <code>lookup</code> logic, &#8220;duplicate&#8221; in this case means duplicate references, unlike in the first pass implementaiton.</p>
 
-<p>Due to Dapper&#8217;s focus on performance (and reducing instances of N+1 queries), you&#8217;d think they would highlight a use case like this on their website. Sadly, they don&#8217;t. I had to dig down deep in their test cases to find the basic implementation above (in the <a href="http://code.google.com/p/dapper-dot-net/source/browse/Tests/Tests.cs#824">ParentChildIdentityAssociations test</a>), and even then, they don&#8217;t provide comments as to why they&#8217;re doing what they&#8217;re doing.</p>
+<p>Due to Dapper&#8217;s focus on performance (and reducing instances of N+1 queries), you&#8217;d think they would highlight a use case like this on their website. Sadly, they don&#8217;t. I had to dig down deep in their test cases to find the basic implementation above (in the <a href="http://code.google.com/p/dapper-dot-net/source/browse/Tests/Tests.cs#824" title="Tests.cs (code.google.com)">ParentChildIdentityAssociations test</a>), and even then, they don&#8217;t provide comments as to why they&#8217;re doing what they&#8217;re doing.</p>
 </div>
 
 
