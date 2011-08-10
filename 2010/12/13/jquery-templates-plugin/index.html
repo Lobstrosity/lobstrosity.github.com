@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]--><head>
+	<meta charset="utf-8">
+	<title>in parens: jQuery Templates Plugin</title>
+	<meta name="author" content="Matthew Bennett">
+	
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="/stylesheets/combined.min.css" rel="stylesheet" />
+	<link rel="shortcut icon" href="/images/favicon.ico" />
+	<link rel="apple-touch-icon" href="/images/apple-touch-icon.png"/>
+	<script src="/scripts/modernizr-2.0.js"></script>
+</head>
+
+	<body>
+		<div id="wrapper">
+			<header>
+				<h1>(<a href="/">in parens</a>)</h1>
+				<ul>
+					<li><a class="twitter" href="http://twitter.com/#!/Lobstrosity">@Lobstrosity</a></li>
+				</ul>
+			</header>
+
+			<div id="content">
+				<div>
+	<article>
+		
+	<h2 class="entry-title">jQuery Templates Plugin</h2>
+
+<div class="meta">
+	
+
+
+
+
+	<p class="date">
+	<time datetime="2010-12-13T19:25:00-07:00" pubdate>Dec 13<span>th</span>, 2010</time>
+	</p>
+
+	
+
+	<p class="tags">
+		
+			<a class='category' href='/categories/jquery/'>jquery</a>, <a class='category' href='/categories/templates/'>templates</a>, <a class='category' href='/categories/tmpl/'>tmpl</a>
+		
+	</p>
+
+</div>
+
+
+	<div class="entry-content"><h3>Requirements</h3>
+
+<p>jQuery Templates is a plugin to jQuery (requiring at least version 1.4.2), so your page will need to reference both jQuery and the templates plugin (in that order).</p>
+
+<h3><code>script type="text/x-jquery-tmpl"</code></h3>
+
+<p>Templates should be created as the contents of a <code>script</code> tag with any <code>type</code> other than <code>text/javascript</code>. You don&#8217;t have to use <code>script</code> tags, but browsers completely ignore <code>script</code> tags if the <code>type</code> is not <code>text/javascript</code> and it&#8217;s likely that your template will contain text that would be parsed as invalid HTML (breaking your page), so it&#8217;s best if you let the browser ignore it. Note that <code>text/javascript</code> is the default type of a <code>script</code> tag if you don&#8217;t specify one, so a <code>type</code> must be specified. It doesn&#8217;t matter what <code>type</code> you specify, though I would encourage consistency. You&#8217;ll also want to give the <code>script</code> tag an <code>id</code> for easy referencing.</p>
+
+<h3><code>.tmpl([ data ], [ options ])</code></h3>
+
+<p>Both parameters to <a href="http://api.jquery.com/tmpl/" title=".tmpl() - jQuery API (api.jquery.com)"><code>tmpl()</code></a> are optional, though I can&#8217;t think of a practical example for not passing a <code>data</code> parameter.</p>
+
+<p><code>data</code> can be any JavaScript type. If <code>data</code> is an array, the template will be rendered once for each item in the array. Otherwise (including if <code>data</code> is missing), the template will be rendered once.</p>
+
+<p><code>options</code> is an object that contains properties and methods. There is a value named <code>$item</code> that can be accessed in templates. It contains certain properties and methods defined by the plugin, but if <code>options</code> is specified, <code>$item</code> will be extended with <code>options</code>&#8217; properties and methods. That&#8217;s all I&#8217;ll say about <code>options</code>&hellip;</p>
+
+<p>Note that since <code>data</code> can be any type, if you want to specify <code>options</code> but not <code>data</code>, you&#8217;ll still have to pass something (<code>null</code>, <code>undefined</code>, etc.) in <code>data</code>&#8217;s place.</p>
+
+<p><code>tmpl()</code> returns a jQuery collection of elements so it can be easily passed to any of the jQuery DOM insertion methods (<code>html()</code>, <code>appendTo()</code>, etc.).</p>
+
+<h3>Template Tags</h3>
+
+<p>jQuery Templates includes a few tags for rendering data. Among others, it includes <code>${}</code>, <code>{{if}}</code> and <code>{{else}}</code>, and <code>{{each}}</code>.</p>
+
+<h3><code>${}</code></h3>
+
+<p>The <code>${}</code> tag is used for rendering content from the data passed to the template. <code>${}</code> has no closing tag. If the template is currently rendering an object (let&#8217;s call it <code>user</code>), then <code>${name}</code> would render the value of <code>user.name</code>, <code>${emailAddress}</code> would render the value of <code>user.emailAddress</code>, and so on. If the template is currently rendering a value, <code>${$value}</code> would render the value.</p>
+
+<h3><code>{{if}}</code> and <code>{{else}}</code></h3>
+
+<p>The <code>{{if}}</code> tag requires a closing <code>{{/if}}</code> tag. <code>{{if}}</code> takes a parameter that is the expression to evaluate in the form of <code>{{if expression}}</code>. <code>{{else}}</code> does not have a closing tag. The closing <code>{{/if}}</code> or a new <code>{{else}}</code> closes the previous <code>{{else}}</code>. <code>{{else}}</code> can be given an optional <code>expression</code> parameter which will make it behave like <code>else if</code>.</p>
+
+<h3><code>{{each}}</code></h3>
+
+<p>The <code>{{each}}</code> tag is used for iterating over an array. It has a closing <code>{{/each}}</code> tag. Everything between the two is rendered once for each item in the array. <code>{{each}}</code> takes the array to be iterated as a parameter. If the array is called <code>items</code>, it would be passed as <code>{{each items}}</code>.</p>
+
+<p>Within the <code>{{each}}</code> tag, <code>$value</code> and <code>$index</code> refer to the current value and the index of the current value, respectively. There is optional syntax that allows you to rename <code>$index</code> and <code>$value</code>:</p>
+
+<p class="gist"><a href="https://gist.github.com/1135937#file_1.jquery_templates.html" data-file="1.jqueryTemplates.html">https://gist.github.com/1135937#file_1.jquery_templates.html</a></p>
+
+
+<h3>Altogether Now</h3>
+
+<p>The code below can be viewed as a demo <a href="/demos/2010-12-13-jquery-templates-plugin.html">here</a>.</p>
+
+<p class="gist"><a href="https://gist.github.com/1135937#file_2.jquery_templates.html" data-file="2.jqueryTemplates.html">https://gist.github.com/1135937#file_2.jquery_templates.html</a></p>
+
+</div>
+
+
+	</article>
+</div>
+
+			</div>
+
+			<footer>
+				<nav>
+					<ul>
+						
+
+						<li class="archive"><a href="/archive">Archive</a></li>
+
+						
+					</ul>
+				</nav>
+			</footer>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script src="/scripts/gist.min.js"></script>
+		<script>var _gaq=[['_setAccount','UA-25030121-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=true;g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s);})(document,'script');</script>
+	</body>
+</html>
