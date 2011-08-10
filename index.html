@@ -95,28 +95,7 @@
 
 <blockquote><p>&hellip;can be any JavaScript type, including Array or Object.</p></blockquote>
 
-<p>The typical case would be to pass an object. This allows you to refer to the properties of that object by name in the template. <a href="/demos/2010-12-14-using-arrays-in-templates.1.html">Demo</a>:</p>
-
-<p class="gist"><a href="http://gist.github.com/1135981#file_using_arrays_as_templates.1.html" data-file="usingArraysAsTemplates.1.html">http://gist.github.com/1135981#file_using_arrays_as_templates.1.html</a></p>
-
-
-<p>Another typical case would be to pass an object that contains an array of values (not objects). <a href="/demos/2010-12-14-using-arrays-in-templates.2.html">Demo</a>:</p>
-
-<p class="gist"><a href="http://gist.github.com/1135981#file_using_arrays_as_templates.2.html" data-file="usingArraysAsTemplates.2.html">http://gist.github.com/1135981#file_using_arrays_as_templates.2.html</a></p>
-
-
-<p>The syntax for <code>{{each}}</code> gives the current value an accessible name: <code>$value</code>. That convention does not exist, however, outside of <code>{{each}}</code> and the documentation does not describe the syntax for accessing the current value of an array when the array is the root data item. After looking through the source for the plugin and playing with <code>$item</code>, I found that you can do it as follows. <a href="/demos/2010-12-14-using-arrays-in-templates.3.html">Demo</a>:</p>
-
-<p class="gist"><a href="http://gist.github.com/1135981#file_using_arrays_as_templates.3.html" data-file="usingArraysAsTemplates.3.html">http://gist.github.com/1135981#file_using_arrays_as_templates.3.html</a></p>
-
-
-<p><code>$item.data</code> contains the data that the current template is acting on. It refers to the same value throughout a template. It doesn&#8217;t, for example, refer to the current item in an <code>{{each}}</code> iteration. Keep in mind, though, that if <code>.tmpl()</code> is called with an array, the template is rendered once for each item in the array, which is why, in the above example, <code>$item.data</code> refers to each individual value, not to the array that was passed in.</p>
-
-<p>Another example requiring the <code>$item.data</code> syntax is when <code>.tmpl()</code> is called with an object, but the object contains an array of values that will be passed to a nested template. <a href="/demos/2010-12-14-using-arrays-in-templates.4.html">Demo</a>:</p>
-
-<p class="gist"><a href="http://gist.github.com/1135981#file_using_arrays_as_templates.4.html" data-file="usingArraysAsTemplates.4.html">http://gist.github.com/1135981#file_using_arrays_as_templates.4.html</a></p>
-
-</div>
+<p><a href="/2010/12/14/using-arrays-in-templates/">Continued &rarr;</a></p></div>
 
 
 		</article>
@@ -151,50 +130,7 @@
 
 <p>jQuery Templates is a plugin to jQuery (requiring at least version 1.4.2), so your page will need to reference both jQuery and the templates plugin (in that order).</p>
 
-<h3><code>script type="text/x-jquery-tmpl"</code></h3>
-
-<p>Templates should be created as the contents of a <code>script</code> tag with any <code>type</code> other than <code>text/javascript</code>. You don&#8217;t have to use <code>script</code> tags, but browsers completely ignore <code>script</code> tags if the <code>type</code> is not <code>text/javascript</code> and it&#8217;s likely that your template will contain text that would be parsed as invalid HTML (breaking your page), so it&#8217;s best if you let the browser ignore it. Note that <code>text/javascript</code> is the default type of a <code>script</code> tag if you don&#8217;t specify one, so a <code>type</code> must be specified. It doesn&#8217;t matter what <code>type</code> you specify, though I would encourage consistency. You&#8217;ll also want to give the <code>script</code> tag an <code>id</code> for easy referencing.</p>
-
-<h3><code>.tmpl([ data ], [ options ])</code></h3>
-
-<p>Both parameters to <a href="http://api.jquery.com/tmpl/" title=".tmpl() - jQuery API (api.jquery.com)"><code>tmpl()</code></a> are optional, though I can&#8217;t think of a practical example for not passing a <code>data</code> parameter.</p>
-
-<p><code>data</code> can be any JavaScript type. If <code>data</code> is an array, the template will be rendered once for each item in the array. Otherwise (including if <code>data</code> is missing), the template will be rendered once.</p>
-
-<p><code>options</code> is an object that contains properties and methods. There is a value named <code>$item</code> that can be accessed in templates. It contains certain properties and methods defined by the plugin, but if <code>options</code> is specified, <code>$item</code> will be extended with <code>options</code>&#8217; properties and methods. That&#8217;s all I&#8217;ll say about <code>options</code>&hellip;</p>
-
-<p>Note that since <code>data</code> can be any type, if you want to specify <code>options</code> but not <code>data</code>, you&#8217;ll still have to pass something (<code>null</code>, <code>undefined</code>, etc.) in <code>data</code>&#8217;s place.</p>
-
-<p><code>tmpl()</code> returns a jQuery collection of elements so it can be easily passed to any of the jQuery DOM insertion methods (<code>html()</code>, <code>appendTo()</code>, etc.).</p>
-
-<h3>Template Tags</h3>
-
-<p>jQuery Templates includes a few tags for rendering data. Among others, it includes <code>${}</code>, <code>{{if}}</code> and <code>{{else}}</code>, and <code>{{each}}</code>.</p>
-
-<h3><code>${}</code></h3>
-
-<p>The <code>${}</code> tag is used for rendering content from the data passed to the template. <code>${}</code> has no closing tag. If the template is currently rendering an object (let&#8217;s call it <code>user</code>), then <code>${name}</code> would render the value of <code>user.name</code>, <code>${emailAddress}</code> would render the value of <code>user.emailAddress</code>, and so on. If the template is currently rendering a value, <code>${$value}</code> would render the value.</p>
-
-<h3><code>{{if}}</code> and <code>{{else}}</code></h3>
-
-<p>The <code>{{if}}</code> tag requires a closing <code>{{/if}}</code> tag. <code>{{if}}</code> takes a parameter that is the expression to evaluate in the form of <code>{{if expression}}</code>. <code>{{else}}</code> does not have a closing tag. The closing <code>{{/if}}</code> or a new <code>{{else}}</code> closes the previous <code>{{else}}</code>. <code>{{else}}</code> can be given an optional <code>expression</code> parameter which will make it behave like <code>else if</code>.</p>
-
-<h3><code>{{each}}</code></h3>
-
-<p>The <code>{{each}}</code> tag is used for iterating over an array. It has a closing <code>{{/each}}</code> tag. Everything between the two is rendered once for each item in the array. <code>{{each}}</code> takes the array to be iterated as a parameter. If the array is called <code>items</code>, it would be passed as <code>{{each items}}</code>.</p>
-
-<p>Within the <code>{{each}}</code> tag, <code>$value</code> and <code>$index</code> refer to the current value and the index of the current value, respectively. There is optional syntax that allows you to rename <code>$index</code> and <code>$value</code>:</p>
-
-<p class="gist"><a href="https://gist.github.com/1135937#file_1.jquery_templates.html" data-file="1.jqueryTemplates.html">https://gist.github.com/1135937#file_1.jquery_templates.html</a></p>
-
-
-<h3>Altogether Now</h3>
-
-<p>The code below can be viewed as a demo <a href="/demos/2010-12-13-jquery-templates-plugin.html">here</a>.</p>
-
-<p class="gist"><a href="https://gist.github.com/1135937#file_2.jquery_templates.html" data-file="2.jqueryTemplates.html">https://gist.github.com/1135937#file_2.jquery_templates.html</a></p>
-
-</div>
+<p><a href="/2010/12/13/jquery-templates-plugin/">Continued &rarr;</a></p></div>
 
 
 		</article>
