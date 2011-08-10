@@ -93,64 +93,7 @@
 
 	<div class="entry-content"><p>Open up <a href="http://www.colly.com" title="Simon Collison (www.colly.com)">www.colly.com</a> or <a href="http://lanyrd.com" title="Lanyrd (lanyrd.com)">lanyrd.com</a> and (assuming you&#8217;re using a modern browser) watch what happens as you resize your browser window. As the window size changes, the page&#8217;s layout morphs to accomodate the window size. CSS includes a nice feature to target styles to particular media metrics, width being one of them. In real-time, the browser will apply different styles based on the various queries defined in the stylesheet. It&#8217;s an incredibly useful feature for targeting your style not only to smaller desktop browsers but to mobile devices as well.</p>
 
-<h3>Syntax</h3>
-
-<p>The query syntax can be specified either as an attribute of the stylesheet-referencing link elements (so that entire stylesheets are applied) or within stylesheets (so that groups of rules can be applied):</p>
-
-<p class="gist"><a href="http://gist.github.com/1135710#file_1.css_media_queries.html" data-file="1.cssMediaQueries.html">http://gist.github.com/1135710#file_1.css_media_queries.html</a></p>
-
-
-<p>You can specify multiple criteria with the <code>and</code> keyword. So there&#8217;s no limit to the number of levels you could setup:</p>
-
-<p class="gist"><a href="http://gist.github.com/1135710#file_2.css_media_queries.html" data-file="2.cssMediaQueries.html">http://gist.github.com/1135710#file_2.css_media_queries.html</a></p>
-
-
-<p><code>min-width: X px</code> is equivalent to saying <code>width &gt;= X</code> and <code>max-width: X px</code> is equivalent to saying <code>width &lt;= X</code>. So be mindful that if one query is for <code>max-width: 320px</code> and another is for <code>min-width: 320px</code>, they both pass if the browser is exactly 320 pixels wide.</p>
-
-<h3>Width vs. Device-Width</h3>
-
-<p>Mobile browsers, however, typically don&#8217;t report their actual width for <code>width</code>. For example, the iPhone, whose screen is either 320 pixels wide (for iPhone 3GS and below) or 640 pixels wide (for iPhone 4) reports a width value closer to 1000. Which means a query for <code>max-width: 320px</code> on the iPhone would fail miserably.</p>
-
-<p>Luckily there&#8217;s another property, <code>device-width</code>, that gets us a bit closer. <code>device-width</code> isn&#8217;t necessarily equal to the actual pixel width of the device screen. It&#8217;s an optimized value. For example, all models of the iPhone report a <code>device-width</code> of 320.</p>
-
-<p>You don&#8217;t want to use <code>min-device-width</code> or <code>max-device-width</code> in your queries, though, because the browser will still render the page as wide as the value of <code>device-width</code>. So if you used <code>device-width</code> queries on an iPhone and made your content 320 pixels wide, the content would be 320 pixels wide in a viewport that is still ~1000 pixels wide, giving you a huge gutter.</p>
-
-<p>But there&#8217;s a way around these issues:</p>
-
-<p class="gist"><a href="http://gist.github.com/1135710#file_3.css_media_queries.html" data-file="3.cssMediaQueries.html">http://gist.github.com/1135710#file_3.css_media_queries.html</a></p>
-
-
-<p>This directive tells the browser to set its viewport&#8217;s width to the value of <code>device-width</code>. You would then query against <code>min-width</code> and <code>max-width</code> (as opposed to <code>min-device-width</code> or <code>max-device-width</code>).</p>
-
-<h3>Getting Fancy with Transitions</h3>
-
-<p>If you resize lanyrd.com (and are using a supporting browser), you&#8217;ll notice that certain elements (most noticeably the white box logo and the &#8220;Lanyrd buzz&#8221; speech bubbles) don&#8217;t snap to a new style but animate smoothly to the new settings.</p>
-
-<p>This is done by setting <a href="http://www.w3.org/TR/css3-transitions/" title="CSS Transitions Module Level 3 (www.w3.org)">CSS transitions</a> on the settings that change for those elements from one style to the next. So if you had a wrapper div and you wanted its width to have an animated transition when it changed instead of snapping, you&#8217;d use something like:</p>
-
-<p class="gist"><a href="http://gist.github.com/1135710#file_4.css_media_queries.html" data-file="4.cssMediaQueries.html">http://gist.github.com/1135710#file_4.css_media_queries.html</a></p>
-
-
-<h3>Putting It All Together</h3>
-
-<p>For brevity&#8217;s sake, I won&#8217;t post all the code here but you can view the source of the <a href="/demos/2010-12-09-css-media-queries.html">demo page</a>.</p>
-
-<h3>Minimizing HTTP Requests</h3>
-
-<p>All stylesheets are downloaded by the browser regardless of the outcome of media queries, which means using queries to target specific media won&#8217;t prevent HTTP requests when the query fails.</p>
-
-<p>If, however, you use media queries to assign a background image, for example, and you have a large version and a small version, browsers will not download an image referenced in a stylesheet until there is an element that the rule&#8217;s selector applies to. So you do prevent HTTP requests in that case. (This isn&#8217;t a feature of media queries. It&#8217;s default browser behavior. It does come in handy when combined with media queries, though.)</p>
-
-<h3>Progressive Enhancement</h3>
-
-<p>Progressive enhancement evangelists <a href="http://www.slideshare.net/bryanrieger/rethinking-the-mobile-web-by-yiibu" title="Rethinking the Mobile Web by Yiibu (www.slideshare.net)">will tell you</a> that your website&#8217;s default styles should be its absolute baseline styles and that the page should build on those according to feature availability. (This usually gets translated as &#8220;design for mobile and dynamically enhance the page for a desktop experience instead of the other way around.&#8221;)</p>
-
-<p>CSS media queries sound like a great way to handle that… And they would be… If all browsers supported them…</p>
-
-<p>IE9 will be the first version of IE to support media queries. So if your default styles were for mobile and you used media queries to add desktop styles, <a href="http://gs.statcounter.com/#browser-ww-monthly-201006-201011-bar" title="StatCounter Global Stats (gs.statcounter.com)">roughly 50%</a> of desktop browsers wouldn&#8217;t be able to handle it. And I&#8217;m sure that there are plenty of mobile browsers out there that don&#8217;t support media queries yet, either.</p>
-
-<p>Which leads to an unforunate conclusion if you want to rely solely on media queries: Whether you baseline for desktop and use media queries to dynamically assign styles for mobile, or you baseline for mobile and use media queries to dynamically assign styles for desktop, you&#8217;re going to leave a non-trivial number of browsers out in the cold.</p>
-</div>
+<p><a href="/2010/12/09/css-media-queries/">Continued &rarr;</a></p></div>
 
 
 		</article>
