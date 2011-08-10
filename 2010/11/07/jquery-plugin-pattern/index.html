@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]--><head>
+	<meta charset="utf-8">
+	<title>in parens: jQuery Plugin Pattern</title>
+	<meta name="author" content="Matthew Bennett">
+	
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="/stylesheets/combined.min.css" rel="stylesheet" />
+	<link rel="shortcut icon" href="/images/favicon.ico" />
+	<link rel="apple-touch-icon" href="/images/apple-touch-icon.png"/>
+	<script src="/scripts/modernizr-2.0.js"></script>
+</head>
+
+	<body>
+		<div id="wrapper">
+			<header>
+				<h1>(<a href="/">in parens</a>)</h1>
+				<ul>
+					<li><a class="twitter" href="http://twitter.com/#!/Lobstrosity">@Lobstrosity</a></li>
+				</ul>
+			</header>
+
+			<div id="content">
+				<div>
+	<article>
+		
+	<h2 class="entry-title">jQuery Plugin Pattern</h2>
+
+<div class="meta">
+	
+
+
+
+
+	<p class="date">
+	<time datetime="2010-11-07T17:31:00-07:00" pubdate>Nov 7<span>th</span>, 2010</time>
+	</p>
+
+	
+
+	<p class="tags">
+		
+			<a class='category' href='/categories/javascript/'>javascript</a>, <a class='category' href='/categories/jquery/'>jquery</a>, <a class='category' href='/categories/patterns/'>patterns</a>, <a class='category' href='/categories/plugin/'>plugin</a>
+		
+	</p>
+
+</div>
+
+
+	<div class="entry-content"><p>This post is a followup to a previous post, <a href="/2010/10/30/javascript-module-pattern/" title="JavaScript Module Pattern">JavaScript Module Pattern</a>. <a href="http://docs.jquery.com/Plugins/Authoring" title="Plugins/Authoring (docs.jquery.com)">jQuery&#8217;s documentation</a> encourages developers to use JavaScript&#8217;s module pattern to create jQuery plugins. See the previous post if you&#8217;re unfamiliar with the module pattern. jQuery itself is passed to the function as its module parameter, typically as <code>$</code>. Plugins are defined within the module function by declaring functions on the <code>$</code> or <code>$.fn</code> objects. Functions declared on <code>$</code> are selector-independent and can return whatever the developer chooses. Functions declared on <code>$.fn</code> are selector-dependent and should return a jQuery object to maintain jQuery&#8217;s chainability.</p>
+
+<p>As an example, here&#8217;s a plugin that provides enable and disable functionality for form controls:</p>
+
+<p class="gist"><a href="https://gist.github.com/1135651#file_1.jquery_plugin_pattern.js" data-file="1.jqueryPluginPattern.js">https://gist.github.com/1135651#file_1.jquery_plugin_pattern.js</a></p>
+
+
+<p>By creating closure around <code>$</code>, the plugin can refer to jQuery using <code>$</code>, even if scripts previously loaded in the page overwrote <code>$</code> for some reason. It also won&#8217;t overwrite that other developer&#8217;s <code>$</code> object. You&#8217;re protected from their <code>$</code> and vice versa.</p>
+
+<p>Within the functions, <code>this</code> will refer to the jQuery object on which the function was invoked.</p>
+
+<p>The two plugin functions take advantage of jQuery&#8217;s <code>each</code> function to iterate the set of selected elements, operate on each one in turn, then return the elements to maintain jQuery&#8217;s chainability.</p>
+
+<p>Notice in <code>disable</code> that within the each call, only elements that match the &#8216;:input&#8217; criteria are disabled. I could have saved a couple lines of code and done the filtering by chaining it to the <code>each</code> call:</p>
+
+<p class="gist"><a href="https://gist.github.com/1135651#file_2.jquery_plugin_pattern.js" data-file="2.jqueryPluginPattern.js">https://gist.github.com/1135651#file_2.jquery_plugin_pattern.js</a></p>
+
+
+<p>But then only the matching elements would have been returned by <code>disable</code>. Sometimes you want your plugin to filter elements and only return certain ones. This is not one of those cases. Be mindful that the set of elements you want your plugin to operate on and the set of elements it should return aren&#8217;t necessarily the same.</p>
+</div>
+
+
+	</article>
+</div>
+
+			</div>
+
+			<footer>
+				<nav>
+					<ul>
+						
+
+						<li class="archive"><a href="/archive">Archive</a></li>
+
+						
+					</ul>
+				</nav>
+			</footer>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script src="/scripts/gist.min.js"></script>
+		<script>var _gaq=[['_setAccount','UA-25030121-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=true;g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s);})(document,'script');</script>
+	</body>
+</html>
