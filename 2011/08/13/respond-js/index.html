@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]--><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>in parens: Respond.js</title>
+	<meta name="author" content="Matthew Bennett">
+	
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/images/favicon.ico" />
+	<link rel="apple-touch-icon" href="/images/apple-touch-icon.png"/>
+	<link href="/stylesheets/combined.min.css" rel="stylesheet" />
+	<script src="/scripts/modernizr-2.0.js"></script>
+</head>
+
+	<body>
+		<div id="wrapper">
+			<header>
+				<h1>
+					
+						(<span>in parens</span>)
+					
+				</h1>
+				<ul>
+					<li><a class="twitter" href="http://twitter.com/#!/Lobstrosity">@Lobstrosity</a></li>
+				</ul>
+			</header>
+
+			<div id="content">
+				<div>
+	<article>
+		
+	<h2 class="entry-title">Respond.js</h2>
+
+<div class="meta">
+	
+
+
+
+
+	<p class="date">
+	<time datetime="2011-08-13T20:24:00-07:00" pubdate>Aug 13<span>th</span>, 2011</time>
+	</p>
+
+	
+
+	<p class="tags">
+		
+			<a class='category' href='/archive/css/'>css</a>, <a class='category' href='/archive/javascript/'>javascript</a>, <a class='category' href='/archive/polyfill/'>polyfill</a>
+		
+	</p>
+
+</div>
+
+
+	<div class="entry-content"><p>In <a href="/2010/12/09/css-media-queries/" title="CSS Media Queries">a previous post</a>, due to a lack of browser support for CSS media queries (in both mobile and desktop browsers), I came to the unfortunate conclusion that&hellip;</p>
+
+<blockquote><p>Whether you baseline for desktop and use media queries to dynamically assign styles for mobile, or you baseline for mobile and use media queries to dynamically assign styles for desktop, you&#8217;re going to leave a non-trivial number of browsers out in the cold.</p></blockquote>
+
+<h3>Respond</h3>
+
+<p>And then came <a href="https://github.com/scottjehl/Respond" title="scottjehl/Respond at master (github.com)">Respond.js</a>.</p>
+
+<!--more-->
+
+
+<p>Respond is a JavaScript library that adds support for <code>min-width</code> and <code>max-width</code> CSS media queries in browsers that do not natively support media queries, such as IE 6, 7, and 8. (You know&hellip;that [sadly] gigantic slice of the browser usage pie chart.) In browsers that <em>do</em> support media queries, Respond quickly exits, without adding any cycle-sucking event hooks and lets the browser do its own thing.</p>
+
+<p>Respond isn&#8217;t one-of-a-kind, though it does appear to be the most light-weight in its category at 3kb minified. I first head about Respond when it was included in version 2 of the <a href="http://html5boilerplate.com/#v2" title="HTML5 Boilerplate is 2.0! (html5boilerplate.com)">HTML5 Boilerplate</a>. Respond alternatives include <a href="http://code.google.com/p/css3-mediaqueries-js/" title="css3-mediaqueries-js (code.google.com)">css3-mediaqueries-js</a>, which&amp;mdashwhile more feature-rich than Respond&mdash;weighs in at around 14kb minified.</p>
+
+<p>To use Respond, include the script in your <code>head</code> after the last <code>link[rel=stylesheet]</code> element. The usual best practice is to include scripts at the bottom of the page, but this one needs to be included in the <code>head</code> because you want it to run before any of the page renders. If stylesheets are referenced at the end of the body, the body gets rendered and then re-rendered when the stylesheet gets applied (an effect known as Flash of Unstyled Content, or FOUC). A similar effect would happen if you referenced Respond at the bottom of your page, because your base styles would load and then Respond would execute and possibly re-render things if media queries came into play.</p>
+
+<h3>Demo</h3>
+
+<p>Click <a href="/demos/2011-08-13-respond-js.1.html">here</a> to see the demo page from the previous post <em>without</em> Respond. If you open it in a browser that does not support media queries, you&#8217;ll only get the full-width experience. Sad face.</p>
+
+<p>Click <a href="/demos/2011-08-13-respond-js.2.html">here</a> to see the demo page from the previous post <em>with</em> Respond. In all browsers, you should see the page respond (get it?) as you resize.</p>
+
+<h3>Downsides</h3>
+
+<p>Yes, there are a few downsides :(</p>
+
+<ol>
+<li>Respond has to parse referenced stylesheets to determine whether or not they contain media queries.
+
+<ol>
+<li>The DOM doesn&#8217;t provide any way for developers to access the contents of <code>style</code>-element stylesheets or <code>link</code>-element referenced stylesheets. Respond can&#8217;t touch <code>style</code> elements, then, but can get to <code>link</code> stylesheets by looking for <code>link</code> elements and re-requesting the files they reference. That is, Respond only supports <code>link</code>, no <code>style</code>.</li>
+<li>Respond has to re-request each stylesheet via AJAX. Which means that local, <code>file://</code> protocol testing won&#8217;t work in browsers that don&#8217;t support local AJAX, like Chrome.</li>
+<li>And because each stylesheet is re-requested, you better have a stingy caching policy in place. Otherwise, every stylesheet will mean two HTTP round trips and possibly two full file downloads. If you don&#8217;t have a decent caching policy in place, I daresay Respond isn&#8217;t worth the performance hit. But, if you don&#8217;t have a good caching policy in place, be a good internet citizen and come up with one.</li>
+</ol>
+</li>
+<li>For some reason, you have to specify a media type in your queries. That is, the following works:
+<p class="gist"><a href="http://gist.github.com/1145327#file_respond_js.1.css" data-file="respondJs.1.css">http://gist.github.com/1145327#file_respond_js.1.css</a></p>
+While the following does not:
+<p class="gist"><a href="http://gist.github.com/1145327#file_respond_js.2.css" data-file="respondJs.2.css">http://gist.github.com/1145327#file_respond_js.2.css</a></p></li>
+<li>It only supports <code>px</code>-based units in the <code>min-</code> and <code>max-width</code> values of your media queries. No <code>em</code> support.</li>
+<li>The basic idea behind Respond is to poll the browser for its current width and conditionally add stylesheets to and remove stylesheets from the DOM. Beyond that, you are still bound to each specific browser&#8217;s CSS implementation. You don&#8217;t get the benefit of certain features that are usually implemented along with media queries&mdash;namely CSS transitions&mdash;that aren&#8217;t natively supported.</li>
+<li>And since it&#8217;s polling width and possibly executing stylesheets as you resize, you may see performance issues on slower machines and/or in older browsers.</li>
+</ol>
+
+
+<h3>Conclusion</h3>
+
+<p>Despite the downsides, Respond looks very promising. I can&#8217;t wait to implement it on a wider scale, both personally and professionally.</p>
+</div>
+
+
+	</article>
+</div>
+
+			</div>
+
+			<footer>
+				<nav>
+					<ul>
+						
+
+						<li class="archive"><a href="/archive">Archive</a></li>
+
+						
+					</ul>
+				</nav>
+			</footer>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script src="/scripts/gist.min.js"></script>
+		<script>var _gaq=[['_setAccount','UA-25030121-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=true;g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s);})(document,'script');</script>
+	</body>
+</html>
