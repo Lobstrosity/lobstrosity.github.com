@@ -98,10 +98,11 @@
 While the following does not:
 <p class="gist"><a href="http://gist.github.com/1145327#file_respond_js.2.css" data-file="respondJs.2.css">http://gist.github.com/1145327#file_respond_js.2.css</a></p></li>
 <li>It only supports <code>px</code>-based units in the <code>min-</code> and <code>max-width</code> values of your media queries. No <code>em</code> support.</li>
-<li>The basic idea behind Respond is to poll the browser for its current width and conditionally add stylesheets to and remove stylesheets from the DOM. Beyond that, you are still bound to each specific browser&#8217;s CSS implementation. You don&#8217;t get the benefit of certain features that are usually implemented along with media queries&mdash;namely CSS transitions&mdash;that aren&#8217;t natively supported.</li>
-<li>And since it&#8217;s polling width and possibly executing stylesheets as you resize, you may see performance issues on slower machines and/or in older browsers.</li>
+<li>The basic mechanism behind Respond is an event handler that fires when the browser resizes, then conditionally adding stylesheets to or removing stylesheets from the page. So you may see performance issues on slower machines and/or in older browsers.</li>
 </ol>
 
+
+<p>And while not specifically a downside of Respond, something else to keep in mind is that beyond Respond&#8217;s basic support for <code>min-width</code> and <code>max-width</code> media queries, you are still bound to each specific browser&#8217;s CSS implementation. You don&#8217;t get the benefit of certain features that are usually implemented along with media queries&mdash;namely CSS transitions&mdash;that aren&#8217;t natively supported.</p>
 
 <h3>Conclusion</h3>
 
