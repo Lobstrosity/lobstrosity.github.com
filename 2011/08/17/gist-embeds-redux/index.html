@@ -48,6 +48,12 @@
 
 	
 
+	<p class="tags">
+		
+			<a class='category' href='/archive/gist/'>gist</a>, <a class='category' href='/archive/github/'>github</a>, <a class='category' href='/archive/javascript/'>javascript</a>, <a class='category' href='/archive/jquery/'>jquery</a>
+		
+	</p>
+
 </div>
 
 
@@ -65,6 +71,8 @@
 <!--more-->
 
 
+<h3>The Basics</h3>
+
 <p>I won&#8217;t include the previous script in this post, but you can <a href="https://gist.github.com/637764" title="gist: 637764 (gist.github.com)">get the Gist</a>. Basically what it does is look for paragraphs with a &#8220;gist&#8221; class that have Gist links in them. Something like:</p>
 
 <p class="gist"><a href="http://gist.github.com/1153272#file_usage_before.html" data-file="usageBefore.html">Gist 1153272: usageBefore.html</a></p>
@@ -72,20 +80,24 @@
 
 <p>Once it finds them, it turns the Gist webpage URL into a script URL for the corresponding Gist inclusion script and then replaces the paragraph with what the script would have written there. (And since it&#8217;s just a plain old link [instead of a <code>script</code>], users with JavaScript disabled will still see a link to the Gist.) You can read my <a href="/2010/10/20/embedding-github-gists-in-tumblr-posts/" title="Embedding GitHub Gists in Tumblr Posts">previous post</a> if you want more details on how the script actually works.</p>
 
+<h3>The Changes</h3>
+
 <p>Both the webpage URLs and script URLs are capable of specifying a specific file within a Gist. For the webpage URLs, it&#8217;s just an anchor so that the browser scrolls to that file within the Gist. For the script URLs, it reduces the output of the script&#8217;s <code>document.write</code>s to that specific file.</p>
 
 <p>So I basically needed to update my script&#8217;s logic to respect the file specification.</p>
 
-<p>One small problem is that the two different URL formats have different formats for the filenames and they&#8217;re not interchangable. So, for example, say I have a Gist whose ID is 123 and it contains a file called firstFile.js. The webpage URL for that Gist and that specific file would be <code>http://gist.github.com/123#file_first_file.js</code>. The corresponding script URL would be <code>http://gist.github.com/123.js?file=firstFile.js</code>. Notice the difference in the filenames. The webpage URL replaces capital letters with an underscore and then the lowercase letter (<code>first_file.js</code>). While the script URL uses the original name (<code>firstFile.js</code>). And like I said before, they&#8217;re not interchangable: you can&#8217;t use the script URL format in webpage URLs or vice versa.</p>
+<p>One small problem is that the two different URL formats have different formats for the filenames and they&#8217;re not interchangable. So, for example, say I have a Gist whose ID is <code>123</code> and it contains a file called <code>firstFile.js</code>. The webpage URL for that Gist and that specific file would be <code>http://gist.github.com/123#file_first_file.js</code>. The corresponding script URL would be <code>http://gist.github.com/123.js?file=firstFile.js</code>. Notice the difference in the filenames. The webpage URL replaces capital letters with an underscore and then the lowercase letter (<code>first_file.js</code>). While the script URL uses the original name (<code>firstFile.js</code>). And like I said before, they&#8217;re not interchangable: you can&#8217;t use the script URL format in webpage URLs or vice versa.</p>
 
 <p>I got around this by adding a <code>data-file</code> attribute to the link to specify the filename to use when creating the script URL. So to include the example Gist above, your markup would look like:</p>
 
 <p class="gist"><a href="http://gist.github.com/1153272#file_usage_after.html" data-file="usageAfter.html">Gist 1153272: usageAfter.html</a></p>
 
 
+<h3>The Result</h3>
+
 <p>So JavaScript-less users still see a valid link to the specific file. Otherwise, the script knows which file to request based on the <code>data-file</code> attribute. The script doesn&#8217;t have to worry about converting one filename format to the other. No thanks.</p>
 
-<p>The result:</p>
+<p>The script:</p>
 
 <p class="gist"><a href="http://gist.github.com/1153272#file_gist.js" data-file="gist.js">Gist 1153272: gist.js</a></p>
 
