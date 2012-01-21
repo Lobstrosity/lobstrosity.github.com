@@ -1,10 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://inparens.com/</loc>
-        <lastmod>2012-01-21T14:48:54-07:00</lastmod>
-    </url>
-    <url>
         <loc>http://inparens.com/2010/10/20/embedding-github-gists-in-tumblr-posts/</loc>
         <lastmod>2011-08-14T14:55:29-07:00</lastmod>
     </url>
@@ -42,6 +38,14 @@
     </url>
     <url>
         <loc>http://inparens.com/2012/01/21/formatting-numbers-with-commas-in-javascript/</loc>
-        <lastmod>2012-01-21T14:48:54-07:00</lastmod>
+        <lastmod>2012-01-21T15:14:58-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://inparens.com/archive/</loc>
+        <lastmod>2012-01-21T15:14:58-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://inparens.com/</loc>
+        <lastmod>2012-01-21T15:14:58-07:00</lastmod>
     </url>
 </urlset>

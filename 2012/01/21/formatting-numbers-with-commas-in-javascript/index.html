@@ -69,29 +69,29 @@
 
 <h3>The Regular Expression</h3>
 
-<p>Since JavaScript is notoriously terrible when it comes to arithmetic and precision, the original value is treated as a string throughout. No division by 1000 or anything like that to determine the parts to join.</p>
+<p>Since JavaScript is notoriously terrible when it comes to arithmetic and precision, the original value is treated as a string throughout. No division by 1,000 or anything like that to determine the parts to join.</p>
 
-<p>The regular expression consists of two (top-level) captured patterns, which represent the two pieces of the orignal value that will be joined with a comma.</p>
+<p>The regular expression consists of two (top-level) captured groups, which represent the two pieces of the original value that will be joined with a comma.</p>
 
 <ol>
-<li>The first pattern, <code>(-?\d+)</code>, captures any number of digits, optionally preceded by a negative sign.</li>
-<li>The second pattern, <code>(\d{3}(\.\d+)?)</code>, captures exactly three digits, optionally followed by a decimal point then one or more digits.</li>
+<li>The first group, <code>(-?\d+)</code>, captures any number of digits, optionally preceded by a negative sign.</li>
+<li>The second group, <code>(\d{3}(\.\d+)?)</code>, captures exactly three digits, optionally followed by a decimal point then one or more digits.</li>
 </ol>
 
 
-<p>The overall pattern is bracketed by <code>^</code> and <code>$</code> (start-of-value and end-of-value matchers), which means that all characters in the original value are captured. This helps ensure that the pattern only matches valid inputs (positive and negative integers and floats).</p>
+<p>The overall pattern is bracketed by <code>^</code> and <code>$</code> (start-of-value and end-of-value matchers), and since all other matching is done inside the groups, that means that all characters in the original value are captured. This helps ensure that the pattern only matches valid inputs (positive and negative integers and floats).</p>
 
 <h3>The Replace</h3>
 
-<p>The regular expression is used in <code>String</code>&#8217;s <code>replace</code> function. The other parameter to replace is a callback that accepts the captured patterns from matching the value with the regular expression.</p>
+<p>The regular expression is used in <code>String</code>&#8217;s <code>replace</code> function. The other parameter to replace is a callback that accepts the captured groups from matching the value with the regular expression.</p>
 
-<p>Note that if the pattern matches the value, <code>String.replace</code> will return the callback&#8217;s return value. Otherwise, it will return the original string. So, calling <code>'abcd'.commafy()</code> will just return <code>'abcd'</code> (as opposed to throwing an error or returning garbage like <code>'a,bcd'</code>).</p>
+<p>Note that if the expression matches the value, <code>String.replace</code> will return the callback&#8217;s return value. Otherwise, it will return the original string. So, calling <code>'abcd'.commafy()</code> will just return <code>'abcd'</code> (as opposed to throwing an error or returning garbage like <code>'a,bcd'</code>).</p>
 
 <h3>The Callback</h3>
 
-<p>The first value in a match (and the first parameter to the callback) is the original string being matched, which we don&#8217;t need. That&#8217;s the <code>_</code> parameter. You can forget it exists. The first captured pattern (optional negative sign then one or more digits) is <code>a</code>. The second captured pattern (three digits then the optional decimal part) is <code>b</code>.</p>
+<p>The first value in a match (and the first parameter to the callback) is the original string being matched, which we don&#8217;t need. That&#8217;s the <code>_</code> parameter. You can forget that it exists. The first captured group (optional negative sign then one or more digits) is <code>a</code>. The second captured group (three digits then the optional decimal part) is <code>b</code>.</p>
 
-<p>The callback is only adding a single comma, though. Large numbers that need multiple commas are handled by recursively commafying the first captured pattern.</p>
+<p>The callback is only adding a single comma, though. Large numbers that need multiple commas are handled by recursively commafying the first captured group.</p>
 
 <h3>Step Through</h3>
 
